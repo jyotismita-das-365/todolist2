@@ -2,25 +2,24 @@
   max-width: 400px;
   margin: 50px auto;
   padding: 30px;
-  border: 10px;
+  border-radius: 10px;
   background-color: #fff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-label{
+label {
   font-weight: 600;
   display: block;
   color: #555;
   margin: 8px;
 }
-
-h1{
+h1 {
   text-align: center;
-  margin: 20px;
+  margin-bottom: 20px;
   color: #333;
 }
-
-input, textarea{
+input,
+textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -29,8 +28,7 @@ input, textarea{
   font-size: 14px;
   box-sizing: border-box;
 }
-
-button{
+button {
   width: 100%;
   padding: 12px;
   background-color: #007bff;
@@ -41,7 +39,6 @@ button{
   font-size: 16px;
 }
 
-button:hover{
+button:hover {
   background-color: blue;
-  
 }

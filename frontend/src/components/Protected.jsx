@@ -1,9 +1,8 @@
-import { Navigate } from "react-router-dom"
-// import { Children } from "react"
+import { Navigate } from "react-router-dom";
 
-export default function Protected({children}){
-  if(!localStorage.getItem('login')){
-    return <Navigate to="/login" replace/>
+export default function Protected({ children }) {
+  if (!localStorage.getItem("login")) {
+    return <Navigate to="/login" replace />;
   }
-  return children
+  return children;
 }

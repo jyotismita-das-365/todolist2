@@ -1,29 +1,27 @@
-.navbar{
+.navbar {
   display: flex;
   justify-content: space-between;
-  background: #242424;
+  background-color: #242424;
   padding: 5px 10px;
   align-items: center;
   color: #fff;
 }
-
-.logo{
+.logo {
   font-size: 24px;
   font-weight: bold;
 }
 
-.nav-links{
+.nav-links {
   list-style-type: none;
   display: flex;
   gap: 20px;
 }
 
-.nav-links a{
+.nav-links a {
   color: #fff;
   text-decoration: none;
   font-weight: 500;
 }
-
 .nav-links a:hover {
   color: #bfbcbc;
 }

@@ -4,25 +4,28 @@ import { useEffect, useState } from "react";
 
 function NavBar() {
   const [login, setLogin] = useState(localStorage.getItem("login"));
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const logout = () => {
+    console.log("test");
+
     localStorage.removeItem("login");
-    setLogin(null)
+    setLogin(null);
     setTimeout(() => {
-      navigate('/login')
-    },0);
+      navigate("/login");
+    }, 0);
   };
 
   useEffect(() => {
     const handleStorage = () => {
       setLogin(localStorage.getItem("login"));
     };
+
     window.addEventListener("localStorage-change", handleStorage);
+
     return () => {
       window.removeEventListener("localStorage-change", handleStorage);
     };
   }, []);
-
   return (
     <nav className="navbar">
       <div className="logo">To Do App</div>
