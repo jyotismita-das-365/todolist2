@@ -1,8 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import '../style/list.css'
 
 export default function List() {
   const [taskData, setTaskData] = useState();
+  const [selectedTask, setSelectedTask] = useState([]);
 
   useEffect(() => {
     getListData();
@@ -24,10 +26,45 @@ export default function List() {
     }
   }
 
+  const selectAll = (event) => {
+    if(event.target.checked){
+      let items = taskData.map((item) => item._id);
+      setSelectedTask(items);
+    }else{
+      setSelectedTask([]);
+    }
+  }
+
+  const selectStringItem = (id) => {
+    console.log(id);
+    if(selectedTask.includes(id)) {
+      let items = selectedTask.filter((item) => item!=id);
+      setSelectedTask(items);
+    }else {
+      setSelectedTask([id, ...selectedTask])
+    }
+  }
+
+  const deleteMultiple = async() => {
+    let item = await fetch('http://localhost:3200/delete-multiple/', {
+      method: 'delete',
+      body:JSON.stringify(selectedTask),
+      headers:{
+        'Content-Type': 'Application/Json'
+      }
+    });
+    item = await item.json()
+    if (item.success) {
+      getListData();
+    }
+  }
+
   return (
-    <div>
+    <div className="list-container"> 
       <h1>To do list</h1>
+      <button onClick={deleteMultiple} className="delete-item  delete-multiple">Delete</button>
       <ul className="task-list">
+        <li className="list-header"><input onChange={selectAll} type="checkbox" /></li>
         <li className="list-header">S.No</li>
         <li className="list-header">Title</li>
         <li className="list-header">Description</li>
@@ -36,10 +73,12 @@ export default function List() {
         {taskData &&
           taskData.map((item, index) => (
             <Fragment key={item._id}>
+              <li className="list-item"><input onChange={() => selectStringItem(item._id)} checked={selectedTask.includes(item._id)} type="checkbox" /></li>
               <li className="list-item">{index + 1}</li>
               <li className="list-item">{item.title}</li>
               <li className="list-item">{item.description}</li>
-              <li className="list-item"><button onClick={() => deleteTask(item._id)} className="delete-item">Delete</button></li>
+              <li className="list-item"><button onClick={() => deleteTask(item._id)} className="delete-item">Delete</button>
+              <Link to={"update/"+ item._id} className="update-item">Update</Link></li>
             </Fragment>
           ))}
       </ul>
