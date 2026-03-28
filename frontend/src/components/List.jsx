@@ -11,18 +11,24 @@ export default function List() {
   }, []);
 
   const getListData = async () => {
-    let list = await fetch("http://localhost:3200/tasks");
+    let list = await fetch("http://localhost:3200/tasks",{
+      credentials:'include'
+    });
     list = await list.json();
     if (list.success) {
       setTaskData(list.result);
+    }else{
+      alert("Try after sometime");
     }
   }
 
   const deleteTask = async(id) => {
-    let item = await fetch('http://localhost:3200/delete/' + id, {method: 'delete'});
+    let item = await fetch('http://localhost:3200/delete/' + id, {method: 'delete', credentials:'include'});
     item = await item.json()
     if (item.success) {
       getListData();
+    }else{
+      alert("Try after sometime");
     }
   }
 
@@ -47,6 +53,7 @@ export default function List() {
 
   const deleteMultiple = async() => {
     let item = await fetch('http://localhost:3200/delete-multiple/', {
+      credentials:'include',
       method: 'delete',
       body:JSON.stringify(selectedTask),
       headers:{
@@ -56,6 +63,8 @@ export default function List() {
     item = await item.json()
     if (item.success) {
       getListData();
+    }else{
+      alert("Try after sometime");
     }
   }
 
